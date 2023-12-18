@@ -14,6 +14,7 @@ const validateName = (name) => {
 };
 
 const validatePassword = (password) => {
+  console.log(password);
   const regex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
   const errors = {};

@@ -1,4 +1,0 @@
-Este es un archivo que se usa para subir las Carpetas sin contenido como:
-    controllers
-    models
-    routes

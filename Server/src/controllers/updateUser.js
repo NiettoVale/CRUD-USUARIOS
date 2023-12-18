@@ -7,45 +7,51 @@ const userFound = async (req, res) => {
     const { username, password, deleted } = req.body;
     const { userId } = req.params;
 
-    const userFound = User.findByPk(userId);
+    const user = await User.findByPk(userId);
 
-    if (userFound) {
-      if (
-        username !== "" ||
-        (undefined && password !== "") ||
-        (password !== undefined && deleted !== "") ||
-        deleted !== undefined
-      ) {
-        const errorsName = validateName(username);
-        const errorsPassword = validatePassword(username);
-
-        if (Object.keys(errorsName).length > 0) {
-          return res.status(400).json({ error: errorsName });
-        }
-
-        if (Object.keys(errorsPassword).length > 0) {
-          return res
-            .status(400)
-            .json({ error: errorsPassword.passwordInvalid });
-        }
-
-        const hashPassword = await encrypt(password);
-        userFound.username = username;
-        userFound.password = hashPassword;
-
-        if (userFound.changed()) {
-          await userFound.save();
-          return res
-            .status(200)
-            .json({ message: "Usuario actualizado con exito" });
-        }
-        return res
-          .status(200)
-          .json({ message: "No hubo cambios para actualizar" });
-      }
+    if (!user) {
+      return res.status(404).json({ error: "El usuario no existe." });
     }
 
-    return res.status(404).json({ error: "El usuario no existe!." });
+    // Validar que se proporcionen datos para actualizar
+    if (
+      username === undefined &&
+      password === undefined &&
+      deleted === undefined
+    ) {
+      return res
+        .status(400)
+        .json({ error: "Se requieren datos para actualizar." });
+    }
+
+    // Validar nombre de usuario si se proporciona
+    if (username !== undefined) {
+      const errorsName = validateName(username);
+      if (Object.keys(errorsName).length > 0) {
+        return res.status(400).json({ error: errorsName });
+      }
+      user.username = username;
+    }
+
+    // Validar contraseña si se proporciona
+    if (password !== undefined) {
+      const errorsPassword = validatePassword(password);
+      if (Object.keys(errorsPassword).length > 0) {
+        return res.status(400).json({ error: errorsPassword.passwordInvalid });
+      }
+      const hashPassword = await encrypt(password);
+      user.password = hashPassword;
+    }
+
+    // Actualizar la propiedad 'deleted' si se proporciona
+    if (deleted !== undefined) {
+      user.deleted = deleted;
+    }
+
+    // Guardar los cambios
+    await user.save();
+
+    return res.status(200).json({ message: "Usuario actualizado con éxito." });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
