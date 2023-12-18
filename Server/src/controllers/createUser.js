@@ -4,10 +4,20 @@ const { validateName, validatePassword } = require("./handlers/validators");
 
 const createUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, roles, permissions } = req.body;
+    if (
+      username === undefined ||
+      username === "" ||
+      password === undefined ||
+      password === ""
+    ) {
+      return res
+        .status(400)
+        .json({ error: "No puede habar propiedades vacias" });
+    }
 
     const errorsName = validateName(username);
-    const errorsPassword = validatePassword(username);
+    const errorsPassword = validatePassword(password);
 
     if (Object.keys(errorsName).length > 0) {
       return res.status(400).json({ error: errorsName });
@@ -22,6 +32,8 @@ const createUser = async (req, res) => {
     await User.create({
       username,
       password: hashPassword,
+      roles,
+      permissions,
     });
 
     return res
