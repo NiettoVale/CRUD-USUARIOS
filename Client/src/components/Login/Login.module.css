@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap");
+
+.mainLogin {
+  display: flex;
+  background-color: #9fbb73;
+}
+
+.imgFondo {
+  height: 100vh;
+  width: 630px;
+}
+
+.sectionLogin {
+  margin: auto auto;
+  background-color: #ed905eb3;
+  width: 600px;
+  height: 550px;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Kelly Slab", sans-serif;
+  font-size: 27px;
+}
+
+.loginLines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginLines h1 {
+  margin-bottom: 0.5rem;
+}
+
+.line {
+  width: 290px;
+  height: 6px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.lineUnder {
+  width: 230px;
+  height: 6px;
+  background-color: #fff;
+}
+
+.sectionForm {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionForm label {
+  margin-bottom: 5px;
+}
+
+.sectionForm input {
+  margin-bottom: 10px;
+  padding: 5px;
+  height: 30px;
+  width: 226px;
+  border-radius: 25px;
+  border: none;
+}
+
+.sectionForm button {
+  background-color: #00a38e;
+  color: white;
+  border-radius: 50px;
+  height: 54px;
+  width: 120px;
+  border: none;
+  cursor: pointer;
+  font-family: "Kelly Slab", sans-serif;
+  font-size: 27px;
+}
+
+.sectionForm button:hover {
+  background-color: #4d14e9;
+}
+
+/* .mainLogin {
+  display: flex;
+  background-color: #9fbb73;
+}
+
+.imgFondo {
+  height: 100vh;
+}
+.loginLines {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loginLines h1 {
+  margin-bottom: -0.5px;
+}
+
+.line {
+  width: 290px;
+  height: 6px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.lineUnder {
+  width: 230px;
+  height: 6px;
+  background-color: #fff;
+}
+
+.sectionLogin {
+  margin: auto auto;
+  background-color: #ec8f5e;
+  width: 700px;
+  height: 600px;
+  border-radius: 50px;
+}
+
+.sectionForm {
+  margin-top: 20px;
+} */
